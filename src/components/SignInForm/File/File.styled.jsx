@@ -23,8 +23,8 @@ export const Input = styled.input`
 `;
 
 export const FileLable = styled.label`
-  box-sizing: border-box;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 
   padding: ${({ error }) => {
     return error ? '13px 15px' : '14px 15px';
