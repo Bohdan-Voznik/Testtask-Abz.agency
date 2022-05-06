@@ -42,7 +42,6 @@ export const FileLable = styled.label`
 `;
 
 export const FileName = styled.span`
-  box-sizing: border-box;
   display: block;
   width: 100%;
 

@@ -39,7 +39,6 @@ export const Label = styled.label`
 `;
 
 export const Field = styled.input`
-  box-sizing: border-box;
   width: 100%;
 
   padding: ${({ error }) => {
