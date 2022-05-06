@@ -58,7 +58,7 @@ export const SignInForm = ({ onSuccess, notifi }) => {
     let value = null;
 
     if (currentTarget !== 'file') {
-      value = e.currentTarget.value;
+      value = e.currentTarget.value.trim();
     } else {
       value = e.currentTarget.files[0];
     }
@@ -85,6 +85,7 @@ export const SignInForm = ({ onSuccess, notifi }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
+    setValidationError(null);
     const validation = new Validation();
     const error = await validation.checkedError({
       name,
@@ -145,7 +146,7 @@ export const SignInForm = ({ onSuccess, notifi }) => {
                       message={validationError?.name}
                     />
                     <Input
-                      type="text"
+                      type="email"
                       name="email"
                       value={email}
                       onChange={handleInputChange}
@@ -154,7 +155,7 @@ export const SignInForm = ({ onSuccess, notifi }) => {
                       message={validationError?.email}
                     />
                     <Input
-                      type="text"
+                      type="tel"
                       name="phone"
                       value={phone}
                       onChange={handleInputChange}
