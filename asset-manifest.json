@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Testtask-Abz.agency/static/css/main.679677be.css",
+    "main.js": "/Testtask-Abz.agency/static/js/main.4115b544.js",
+    "static/media/hero-bg-ultra.jpg": "/Testtask-Abz.agency/static/media/hero-bg-ultra.82a09a81b09ab95ac87d.jpg",
+    "static/media/hero-bg-decktop.jpg": "/Testtask-Abz.agency/static/media/hero-bg-decktop.dcb76ccf6f5b4de839d5.jpg",
+    "static/media/hero-bg-tablet.jpg": "/Testtask-Abz.agency/static/media/hero-bg-tablet.5fa8db33d90344be5bbd.jpg",
+    "static/media/hero-bg-mobile.jpg": "/Testtask-Abz.agency/static/media/hero-bg-mobile.2485d3712167d11fa728.jpg",
+    "static/media/Success.svg": "/Testtask-Abz.agency/static/media/Success.5227138463b959b0f8a1676865e9da6c.svg",
+    "static/media/Logo.svg": "/Testtask-Abz.agency/static/media/Logo.14701f19a3787f7bf22f21dc1d9f1613.svg",
+    "static/media/Default-avatar.svg": "/Testtask-Abz.agency/static/media/Default-avatar.86d65a50ce42b9596ca16e21c9fe0ee0.svg",
+    "index.html": "/Testtask-Abz.agency/index.html",
+    "static/media/Preloader.svg": "/Testtask-Abz.agency/static/media/Preloader.50fe35556443c7affe56772792226ccb.svg",
+    "main.679677be.css.map": "/Testtask-Abz.agency/static/css/main.679677be.css.map",
+    "main.4115b544.js.map": "/Testtask-Abz.agency/static/js/main.4115b544.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.679677be.css",
+    "static/js/main.4115b544.js"
+  ]
+}
