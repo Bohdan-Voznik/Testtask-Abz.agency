@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   width: 328px;
   margin: 0 auto;
   padding: 0 16px;
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
 
   ${theme.breakpoint.tablet} {
     width: 704px;
