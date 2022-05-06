@@ -58,7 +58,7 @@ export const SignInForm = ({ onSuccess, notifi }) => {
     let value = null;
 
     if (currentTarget !== 'file') {
-      value = e.currentTarget.value.trim();
+      value = e.currentTarget.value;
     } else {
       value = e.currentTarget.files[0];
     }
@@ -98,7 +98,13 @@ export const SignInForm = ({ onSuccess, notifi }) => {
       setLoading(false);
       return;
     }
-    createUser({ name, email, phone, positionId, file })
+    createUser({
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      positionId,
+      file,
+    })
       .then(data => {
         setSuccess(true);
         onSuccess();
