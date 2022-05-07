@@ -12,7 +12,6 @@ export const Users = ({
   isShowSignInButton,
   isShowPreloader,
 }) => {
-  console.log(users);
   return (
     <Section>
       <Element name="users">

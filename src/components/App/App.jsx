@@ -18,7 +18,6 @@ export const App = () => {
 
   useEffect(() => {
     fetchUsers().then(data => {
-      console.log(data);
       setNextUrl(data.nextUrl);
       setUsers(data.users);
     });

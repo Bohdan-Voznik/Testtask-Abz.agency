@@ -10,6 +10,8 @@ export async function fetchUsers(nextUrl = `${BASE_URL}/users?page=1&count=6`) {
   const { data } = await axios(options);
   const {
     links: { next_url },
+    total_pages,
+    page,
     users,
   } = data;
 
@@ -25,8 +27,7 @@ export async function fetchUsers(nextUrl = `${BASE_URL}/users?page=1&count=6`) {
     user.phone = fixedPhone;
     return user;
   });
-  console.log(result);
-  return { nextUrl: next_url, users: result };
+  return { nextUrl: page < total_pages ? next_url : null, users: result };
 }
 
 export async function fetchPositions() {
@@ -67,16 +68,8 @@ export async function createUser({ positionId, name, email, phone, file }) {
     },
     data: formData,
   };
-  // {
-  //   method: 'POST',
-  //   body: formData,
-  //   headers: {
-  //     Token: token,
-  //   },
-  // };
 
   const { data } = await axios(options);
-  // await fetch(`${BASE_URL}/users`, options);
   console.log('lol');
   return data;
 }

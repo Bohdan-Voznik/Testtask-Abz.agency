@@ -26,7 +26,6 @@ export const Input = ({
       </Label>
       {message &&
         message.map(text => {
-          console.log(text);
           return (
             <Message key={nanoid()} error={error}>
               {text}
