@@ -80,7 +80,6 @@ export const RadioButton = styled.input`
 
   &:checked + label::after {
     content: '';
-
     position: absolute;
     top: 50%;
     left: 6px;
