@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { theme } from 'js/theme';
 
-import bgImgMob from 'img/hero-bg-mobile.jpg';
-import bgImgTab from 'img/hero-bg-tablet.jpg';
-import bgImgDesk from 'img/hero-bg-decktop.jpg';
-import bgImgUltra from 'img/hero-bg-ultra.jpg';
+import bgImgMob from 'img/hero-bg-mobile-min.webp';
+import bgImgTab from 'img/hero-bg-tablet-min.webp';
+import bgImgDesk from 'img/hero-bg-decktop-min.webp';
+import bgImgUltra from 'img/hero-bg-ultra-min.webp';
 
 export const BackgroundImg = styled.div`
   margin: 0 auto;
