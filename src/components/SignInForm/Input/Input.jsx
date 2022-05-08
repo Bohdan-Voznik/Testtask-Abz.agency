@@ -1,5 +1,4 @@
 import { Item, Label, Field, Message } from './Input.styled';
-import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 
 export const Input = ({
@@ -24,14 +23,7 @@ export const Input = ({
       <Label htmlFor={name} isTextInside={value} error={error}>
         {label}
       </Label>
-      {message &&
-        message.map(text => {
-          return (
-            <Message key={nanoid()} error={error}>
-              {text}
-            </Message>
-          );
-        })}
+      {message && <Message error={error}>{message}</Message>}
     </Item>
   );
 };
@@ -39,7 +31,7 @@ export const Input = ({
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   error: PropTypes.bool.isRequired,
-  message: PropTypes.arrayOf(PropTypes.string),
+  message: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

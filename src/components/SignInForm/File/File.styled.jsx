@@ -66,11 +66,15 @@ export const FileName = styled.span`
   }};
 `;
 
-export const Message = styled.p`
-  display: block;
+export const MessageWrapper = styled.div`
   position: absolute;
   left: 16px;
-  bottom: -18px;
+  bottom: -4px;
+  transform: translateY(100%);
+`;
+
+export const Message = styled.p`
+  display: block;
 
   font-size: 12px;
   line-height: 1.166;

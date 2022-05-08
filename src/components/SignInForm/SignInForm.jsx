@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Element } from 'react-scroll';
-import Validation from 'js/checkedError';
 
 import {
   Section,
@@ -23,6 +22,14 @@ import { Container } from 'components/Container/Container';
 import { Success } from './Success/Success';
 
 import { fetchPositions, createUser } from 'js/fetchApi';
+import {
+  validationName,
+  validationEmail,
+  validationPhone,
+  validationFIle,
+} from 'js/checkedError';
+
+const debounce = require('lodash.debounce');
 
 export const SignInForm = ({ onSuccess, notifi }) => {
   const [name, setName] = useState('');
@@ -31,12 +38,41 @@ export const SignInForm = ({ onSuccess, notifi }) => {
   const [positionId, setPositionId] = useState(null);
   const [file, setFile] = useState(null);
 
-  const [validationError, setValidationError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [phoneError, setPhoneError] = useState(null);
+  const [fileError, setFileError] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const [positions, setPositions] = useState(null);
+
+  // ----------REF to debounce function----------
+  const debounceName = useRef(
+    debounce(value => {
+      const fail = validationName(value);
+      console.log(fail);
+      setNameError(fail);
+    }, 1000)
+  ).current;
+
+  const debounceEmail = useRef(
+    debounce(value => {
+      const fail = validationEmail(value);
+      console.log(fail);
+      setEmailError(fail);
+    }, 1000)
+  ).current;
+
+  const debouncePhone = useRef(
+    debounce(value => {
+      const fail = validationPhone(value);
+      console.log(fail);
+      setPhoneError(fail);
+    }, 1000)
+  ).current;
+  // --------------------
 
   useEffect(() => {
     fetchPositions().then(({ positions }) => {
@@ -50,10 +86,9 @@ export const SignInForm = ({ onSuccess, notifi }) => {
     setPhone('');
     setPositionId(null);
     setFile(null);
-    setValidationError(null);
   };
 
-  const handleInputChange = e => {
+  const handleInputChange = async e => {
     const currentTarget = e.currentTarget.name;
     let value = null;
 
@@ -66,15 +101,22 @@ export const SignInForm = ({ onSuccess, notifi }) => {
     switch (currentTarget) {
       case 'name':
         setName(value);
+        console.log('first');
+        debounceName(value.trim());
         break;
       case 'email':
         setEmail(value);
+        debounceEmail(value.trim());
         break;
       case 'phone':
         setPhone(value);
+        debouncePhone(value.trim());
         break;
       case 'file':
         setFile(value);
+        const fail = await validationFIle(value);
+        console.log(fail);
+        setFileError(fail);
         break;
 
       default:
@@ -85,19 +127,6 @@ export const SignInForm = ({ onSuccess, notifi }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
-    setValidationError(null);
-    const validation = new Validation();
-    const error = await validation.checkedError({
-      name,
-      email,
-      phone,
-      file,
-    });
-    if (Object.keys(error).length !== 0) {
-      setValidationError(error);
-      setLoading(false);
-      return;
-    }
     createUser({
       name: name.trim(),
       email: email.trim(),
@@ -122,13 +151,21 @@ export const SignInForm = ({ onSuccess, notifi }) => {
       .finally(() => setLoading(false));
   };
 
-  const isSignInDisabled = !(
+  const isAllFieldsAreCompleted =
     Boolean(name) &&
     Boolean(email) &&
     Boolean(phone) &&
     Boolean(file) &&
-    Boolean(positionId)
+    Boolean(positionId);
+
+  const isNotValidationErrors = !(
+    Boolean(nameError) &&
+    Boolean(emailError) &&
+    Boolean(phone) &&
+    Boolean(fileError)
   );
+
+  const isSignInDisabled = !(isAllFieldsAreCompleted && isNotValidationErrors);
 
   return (
     <>
@@ -148,8 +185,8 @@ export const SignInForm = ({ onSuccess, notifi }) => {
                       value={name}
                       onChange={handleInputChange}
                       label="Your name"
-                      error={Boolean(validationError?.name)}
-                      message={validationError?.name}
+                      error={Boolean(nameError)}
+                      message={nameError}
                     />
                     <Input
                       type="email"
@@ -157,8 +194,8 @@ export const SignInForm = ({ onSuccess, notifi }) => {
                       value={email}
                       onChange={handleInputChange}
                       label="Email"
-                      error={Boolean(validationError?.email)}
-                      message={validationError?.email}
+                      error={Boolean(emailError)}
+                      message={emailError}
                     />
                     <Input
                       type="tel"
@@ -166,11 +203,9 @@ export const SignInForm = ({ onSuccess, notifi }) => {
                       value={phone}
                       onChange={handleInputChange}
                       label="Phone"
-                      error={Boolean(validationError?.phone)}
+                      error={Boolean(phoneError)}
                       message={
-                        validationError?.phone
-                          ? validationError.phone
-                          : ['+38 (XXX) XXX - XX - XX']
+                        phoneError ? phoneError : '+38 (XXX) XXX - XX - XX'
                       }
                     />
                   </div>
@@ -196,8 +231,8 @@ export const SignInForm = ({ onSuccess, notifi }) => {
                       })}
                   </RadioButtonList>
                   <File
-                    error={Boolean(validationError?.photo)}
-                    message={validationError?.photo}
+                    error={Boolean(fileError)}
+                    message={fileError}
                     file={file}
                     onChange={handleInputChange}
                   />

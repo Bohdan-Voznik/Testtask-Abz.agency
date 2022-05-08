@@ -7,6 +7,7 @@ import {
   Input,
   FileLable,
   FileName,
+  MessageWrapper,
   Message,
 } from './File.styled';
 
@@ -29,15 +30,18 @@ export const File = ({ error, message, file, onChange }) => {
           {file?.name ? file.name : 'Upload your photo'}
         </FileName>
       </Wrapper>
-      {message &&
-        message.map(text => {
-          console.log(text);
-          return (
-            <Message key={nanoid()} error={error}>
-              {text}
-            </Message>
-          );
-        })}{' '}
+      {message && (
+        <MessageWrapper>
+          {message.map(text => {
+            console.log(text);
+            return (
+              <Message key={nanoid()} error={error}>
+                {text}
+              </Message>
+            );
+          })}
+        </MessageWrapper>
+      )}
     </Wrap>
   );
 };
