@@ -33,7 +33,6 @@ export const File = ({ error, message, file, onChange }) => {
       {message && (
         <MessageWrapper>
           {message.map(text => {
-            console.log(text);
             return (
               <Message key={nanoid()} error={error}>
                 {text}

@@ -52,7 +52,6 @@ export const SignInForm = ({ onSuccess, notifi }) => {
   const debounceName = useRef(
     debounce(value => {
       const fail = validationName(value);
-      console.log(fail);
       setNameError(fail);
     }, 1000)
   ).current;
@@ -60,7 +59,6 @@ export const SignInForm = ({ onSuccess, notifi }) => {
   const debounceEmail = useRef(
     debounce(value => {
       const fail = validationEmail(value);
-      console.log(fail);
       setEmailError(fail);
     }, 1000)
   ).current;
@@ -68,7 +66,6 @@ export const SignInForm = ({ onSuccess, notifi }) => {
   const debouncePhone = useRef(
     debounce(value => {
       const fail = validationPhone(value);
-      console.log(fail);
       setPhoneError(fail);
     }, 1000)
   ).current;
@@ -101,7 +98,6 @@ export const SignInForm = ({ onSuccess, notifi }) => {
     switch (currentTarget) {
       case 'name':
         setName(value);
-        console.log('first');
         debounceName(value.trim());
         break;
       case 'email':
@@ -115,7 +111,6 @@ export const SignInForm = ({ onSuccess, notifi }) => {
       case 'file':
         setFile(value);
         const fail = await validationFIle(value);
-        console.log(fail);
         setFileError(fail);
         break;
 

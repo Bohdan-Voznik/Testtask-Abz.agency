@@ -50,6 +50,10 @@ export const RadioButtonLabel = styled.label`
   position: relative;
   padding-left: 32px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &::before {
     content: '';
     position: absolute;

@@ -70,6 +70,5 @@ export async function createUser({ positionId, name, email, phone, file }) {
   };
 
   const { data } = await axios(options);
-  console.log('lol');
   return data;
 }

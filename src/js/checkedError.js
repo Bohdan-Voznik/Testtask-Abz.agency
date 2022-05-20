@@ -9,7 +9,6 @@ export function validationName(name) {
 }
 
 export function validationEmail(email) {
-  console.log(email);
   if (email === '') {
     return null;
   }
